@@ -2,11 +2,10 @@ from cmds import *
 from bot import *
 import requests
 import yaml
+import json
 import random
 import subprocess
 
-# groupWhiteList = (711674260, 1027471507, 769734345)
-groupWhiteList = (711674260,261197844)
 
 class Mybot(bot):
     async def on_privateMsgEvent(self, data: PrivateMsg):
@@ -67,8 +66,9 @@ async def init(url: str):
         log.info('正在尝试访问shamrock端...')
         ret = requests.post(f"{url}/get_login_info")
         print(ret.text)
+        botid = json.loads(ret.text)['data']['user_id']
         log.info('shamrock访问正常')
-        return ret.text
+        return botid
     except Exception as e:
         log.error(e)
         return ''
@@ -76,19 +76,23 @@ async def init(url: str):
 
 
 if __name__ == '__main__':
-    log.info("test")
-    log.warning("test")
-    log.error("test")
-    log.critical("test")
-    log.debug("test")
+    log.info("\ttest")
+    log.warning("\ttest")
+    log.error("\ttest")
+    log.critical("\ttest")
+    log.debug("\ttest")
     with open("../config.yaml", 'r') as f:
         config = yaml.safe_load(f)
-
+    groupWhiteList = config['whitelist']
+    admin = config['admin']
     # 创建事件循环对象
     loop = asyncio.get_event_loop()
     # 运行异步函数
-    if loop.run_until_complete(init(config['url'])) == '':
+    botid = loop.run_until_complete(init(config['url']))
+    if botid == '':
         exit(-1)
-
+    log.critical(f'白名单：{groupWhiteList}')
+    log.critical(f'管理员：{admin}')
+    log.critical(f'BotQQ：{botid}')
     msgparser = MsgEventParser(config['url'])
     instance = Mybot(config['url'])
