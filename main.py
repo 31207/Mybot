@@ -47,22 +47,6 @@ async def init(url: str):
     mai.guess()
 
     try:
-
-        log.info('连接安卓模拟器中...')
-        result = subprocess.run(f'adb connect {config["emulator"]}', shell=True, capture_output=True, text=True)
-        if result.returncode != 0:
-            log.error('连接安卓模拟器失败')
-            print(result.stdout)
-            print(result.stderr)
-            return ''
-
-        log.info('映射端口中...')
-        result = subprocess.run(f'adb forward tcp:{config["port"]} tcp:{config["port"]}', shell=True, capture_output=True, text=True)
-        if result.returncode != 0:
-            log.error('映射端口失败')
-            print(result.stdout)
-            print(result.stderr)
-            return ''
         log.info('正在尝试访问shamrock端...')
         ret = requests.post(f"{url}/get_login_info")
         print(ret.text)
