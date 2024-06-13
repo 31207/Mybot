@@ -81,7 +81,7 @@ if __name__ == '__main__':
     log.error("test")
     log.critical("test")
     log.debug("test")
-    with open("./config.yaml", 'r') as f:
+    with open("../config.yaml", 'r') as f:
         config = yaml.safe_load(f)
 
     # 创建事件循环对象
