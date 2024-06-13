@@ -2,6 +2,7 @@ import asyncio
 from bot import *
 import requests
 import yaml
+import json
 import random
 import subprocess
 
@@ -53,7 +54,7 @@ async def init(url: str):
         log.info('正在尝试访问shamrock端...')
         ret = requests.post(f"{url}/get_login_info")
         print(ret.text)
-        botqq = dict(ret.text)['data']['user_id']
+        botqq = json.load(ret.text)['data']['user_id']
         log.info('shamrock访问正常')
         return ret.text
     except Exception as e:
