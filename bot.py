@@ -311,6 +311,16 @@ def pic(path: str):  # 绝对路径
     return j
 
 
+def pic_b64(data: str):  # 绝对路径
+    j = {
+        "type": "image",
+        "data": {
+            "file": f"base64://{data}"
+        }
+    }
+    return j
+
+
 def pic_url(url: str):  # 请务必要http://或https://开头
     j = {
         "type": "image",
@@ -364,7 +374,7 @@ def at(qq: str):
 def json_card(data: dict):
     j = {
         'type': 'json',
-        'data':{
+        'data': {
             'data': '{"app":"com.tencent.eventshare.lua","desc":"","view":"eventshare","bizsrc":"tianxuan.business","ver":"0.0.0.1","prompt":"我喜欢你","appID":"","sourceName":"","actionData":"","actionData_A":"","sourceUrl":"","meta":{"eventshare":{"button1URL":"https://ys.mihoyo.com/?utm_source=adbdpz&from_channel=adbdpz#/","button1disable":false,"button1title":"是的，我想","button2URL":"https://sr.mihoyo.com/ad?from_channel=adbdpz&utm_source=mkt&utm_medium=branding&utm_campaign=871858","button2disable":false,"button2title":"不，算了","buttonNum":2,"jumpURL":"https://h5.qzone.qq.com/v2/vip/card/page/home?_wv=16778146&enteranceId=shareark&visitUin=3470558502","preview":"https://tianquan.gtimg.cn//chatBg//item//51841//newPreview2.png","tag":"QQ","tagIcon":"http://gchat.qpic.cn/gchatpic_new/0/0-0-C5B80B435F21247D9BC6225EAA9A3A76/0?term=2","title":"是否进入虚拟猫娘世界Neko World"}},"config":{"autosize":0,"collect":0,"ctime":1707209474,"forward":1,"height":336,"reply":0,"round":1,"token":"68fb63bdfc5fd39744233bcc72b1ef66","type":"normal","width":263},"text":"","extraApps":[],"sourceAd":"","extra":""}'
         }
     }
