@@ -285,7 +285,6 @@ class MsgEventParser(interfaces):
         path = "./funcs/otto/"
         commands = [
             f'ffmpeg -i {path}{wav_name}.wav {path}{wav_name}.mp3',
-            f'adb push {path}{wav_name}.mp3 /sdcard/shamrock/audio/{wav_name}.mp3'
         ]
         # 使用 subprocess 运行命令
         for i in commands:
@@ -296,7 +295,7 @@ class MsgEventParser(interfaces):
                 print(result.stderr)
                 await self.sendGroupMsg(data.group_id, '活字印刷失败')
                 return
-        await self.sendGroupMsg(data.group_id, msg(audio(f'/sdcard/shamrock/audio/{wav_name}.mp3')))
+        await self.sendGroupMsg(data.group_id, msg(audio(f'{path}{wav_name}.mp3')))
         return
     async def pic_mirror(self,data:GroupMsg,match):
         print(f'镜像：{data.user_id}')
