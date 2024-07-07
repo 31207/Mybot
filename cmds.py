@@ -282,7 +282,7 @@ class MsgEventParser(interfaces):
         random_name = str(int(random.random() * 100000000))
         wav_name = 'wav_' + random_name
         HZYS.export(match.group(1), wav_name)
-        path = ".\\funcs\\otto\\"
+        path = "./funcs/otto/"
         commands = [
             f'ffmpeg -i {path}{wav_name}.wav {path}{wav_name}.mp3',
             f'adb push {path}{wav_name}.mp3 /sdcard/shamrock/audio/{wav_name}.mp3'
