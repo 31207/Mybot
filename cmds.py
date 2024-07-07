@@ -295,7 +295,10 @@ class MsgEventParser(interfaces):
                 print(result.stderr)
                 await self.sendGroupMsg(data.group_id, '活字印刷失败')
                 return
-        await self.sendGroupMsg(data.group_id, msg(audio(f'/data/data/com.termux/files/home/Mybot/funcs/otto/{wav_name}.mp3')))
+        with open(f'{path}{wav_name}.mp3', 'rb') as file:
+            audio = file.read()
+            audio = base64.b64encode(pic).decode()
+            await self.sendGroupMsg(data.group_id, msg(audio_b64(audio)))
         return
     async def pic_mirror(self,data:GroupMsg,match):
         print(f'镜像：{data.user_id}')

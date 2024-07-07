@@ -359,7 +359,14 @@ def audio_url(url: str):
         }
     }
     return j
-
+def audio_b64(url: str):
+     j = {
+        "type": "record",
+        "data": {
+            "file": f"base64://{data}"
+        }
+    }
+    return j
 
 def at(qq: str):
     j = {
