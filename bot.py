@@ -359,7 +359,7 @@ def audio_url(url: str):
         }
     }
     return j
-def audio_b64(url: str):
+def audio_b64(data: str):
     j = {
         "type": "record",
         "data": {
