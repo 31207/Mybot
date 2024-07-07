@@ -295,7 +295,7 @@ class MsgEventParser(interfaces):
                 print(result.stderr)
                 await self.sendGroupMsg(data.group_id, '活字印刷失败')
                 return
-        await self.sendGroupMsg(data.group_id, msg(audio(f'{path}{wav_name}.mp3')))
+        await self.sendGroupMsg(data.group_id, msg(audio(f'/home/dustwind/Mybot/{wav_name}.mp3')))
         return
     async def pic_mirror(self,data:GroupMsg,match):
         print(f'镜像：{data.user_id}')
