@@ -297,7 +297,7 @@ class MsgEventParser(interfaces):
                 return
         with open(f'{path}{wav_name}.mp3', 'rb') as file:
             audio = file.read()
-            audio = base64.b64encode(pic).decode()
+            audio = base64.b64encode(audio).decode()
             await self.sendGroupMsg(data.group_id, msg(audio_b64(audio)))
         return
     async def pic_mirror(self,data:GroupMsg,match):
