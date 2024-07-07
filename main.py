@@ -32,7 +32,7 @@ class Mybot(bot):
         log.info(f"[群:{data.group_id}, QQ:{data.operator_id}, 触摸了:{data.target_id}]")
         if data.group_id not in groupWhiteList:
             return
-        if data.target_id != 3579148268:
+        if data.target_id != botid:
             return
         await self.sendGroupMsg(data.group_id, face(random.randint(0, 221)))
 
