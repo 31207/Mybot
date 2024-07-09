@@ -209,11 +209,9 @@ class MsgEventParser(interfaces):
             f'magick composite {path}{avatar_name}.jpg {path}mask.jpg -geometry 600x600+106+0 {path}{base_name}.jpg',
             f'ffmpeg -i {path}{base_name}.jpg -i {path}tkk.mp4 -filter_complex "[1:v]chromakey=0x00ff00:0.3:0.0[fg_keyed];[0:v][fg_keyed]overlay[out]" -map "[out]" -map 1:a -c:v libx264 -c:a aac -y {path}{mp4_name}.mp4',
             f'ffmpeg -i {path}{mp4_name}.mp4 -vf "scale=320:-1" -y {path}{gif_name}.gif',
-            f'adb push {path}{gif_name}.gif /sdcard/shamrock/pics/{gif_name}.gif',
             f'del {path}{mp4_name}.mp4',
             f'del {path}{base_name}.jpg',
             f'del {path}{avatar_name}.jpg',
-            f'del {path}{gif_name}.gif'
         ]
         # 使用 subprocess 运行命令
         for i in commands:
@@ -224,7 +222,10 @@ class MsgEventParser(interfaces):
                 print(result.stderr)
                 await self.sendGroupMsg(data.group_id, '膜拜失败')
                 return
-        await self.sendGroupMsg(data.group_id, msg(pic(f'/sdcard/shamrock/pics/{gif_name}.gif')))
+        with open(f'{path}{gif_name}.gif','rb') as file:
+            pic = file.read()
+            pic = base64.b64encode(pic).decode()
+            await self.sendGroupMsg(data.group_id, msg(pic_b64(pic)))
         return
 
     async def point(self, data: GroupMsg, match):
@@ -321,7 +322,7 @@ class MsgEventParser(interfaces):
         print(self.user_waiting)
     async def b50(self, data: GroupMsg, match):
         img_base64 = await generate(data.user_id, 'Dustwind')
-        await self.sendGroupMsg(data.group_id, msg(pic_url(img_base64)))
+        await self.sendGroupMsg(data.group_id, msg(pic_b64(img_base64)))
 
     async def random_song(self, data: GroupMsg, match):
         try:
