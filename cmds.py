@@ -197,7 +197,7 @@ class MsgEventParser(interfaces):
         return
 
     async def worship(self, data: GroupMsg, match):
-        path = ".\\funcs\\tkk\\"
+        path = "./funcs/tkk/"
         random_name = str(int(random.random() * 100000000))
         avatar_name = 'avatar_' + random_name
         base_name = 'base_' + random_name
